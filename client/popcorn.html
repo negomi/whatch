@@ -1,0 +1,27 @@
+<head>
+    <title>popcorn</title>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css">
+</head>
+
+<body>
+    <div id="search">
+        {{>search}}
+    </div>
+
+    <div id="movies">
+
+    </div>
+</body>
+
+<template name="search">
+    <form action="">
+        <input type="text" id="search-form" />
+    </form>
+
+    <ul id="results">
+        {{#each results}}
+            <!-- TODO link to function to add to db -->
+            <a href=""><li>{{Title}} ({{Year}})</li></a>
+        {{/each}}
+    </ul>
+</template>
