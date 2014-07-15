@@ -42,15 +42,28 @@ if (Meteor.isClient) {
         }
       }
     },
-    'keypress #search-form': function(event, template) {
-      if (keyAction(event.which) === 'downArrow') {
-        console.log(this.firstNode);
-        console.log(this);
-        // if li.nextchild
-        // focus on next li down the list
-      } else if (keyAction(event.which) === 'upArrow') {
-        // if li.prevchild
-        // focus on next li up the list
+    'click, keydown #results': function(event, template) {
+      event.preventDefault();
+      var key = event.which;
+
+      if (key === 1 || pressed(key) === 'enter') {
+        var imdbId = event.target.dataset.imdbid || event.target.parentNode.dataset.imdbid;
+        fetchDetails(imdbId);
+        Session.set('searchResults', []);
+        $('#search-form').val('');
+      }
+
+      if (pressed(key) === 'down') {
+        event.preventDefault();
+        if (document.activeElement.nextElementSibling)
+          document.activeElement.nextElementSibling.focus();
+      }
+
+      if (pressed(key) === 'up') {
+        if (document.activeElement.previousElementSibling)
+          document.activeElement.previousElementSibling.focus();
+        else
+          $('#search-form').focus();
       }
     }
   });
@@ -60,4 +73,9 @@ if (Meteor.isServer) {
   Meteor.startup(function () {
     // code to run on server at startup
   });
+
+
+  Template.movies.movies = function() {
+    return Movies.find({}).fetch().reverse();
+  };
 }
