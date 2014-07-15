@@ -1,6 +1,5 @@
 <head>
     <title>popcorn</title>
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css">
 </head>
 
 <body>
@@ -8,20 +7,37 @@
         {{>search}}
     </div>
 
-    <div id="movies">
+    <div id="modal">
+        {{>modal}}
+    </div>
 
+    <div id="movies">
+        {{>movies}}
     </div>
 </body>
 
 <template name="search">
-    <form action="">
-        <input type="text" id="search-form" />
-    </form>
+    <input type="text" id="search-form" />
 
     <ul id="results">
         {{#each results}}
-            <!-- TODO link to function to add to db -->
-            <a href=""><li>{{Title}} ({{Year}})</li></a>
+            <a href="#" data-imdbID="{{imdbID}}"><li>{{Title}} ({{Year}})</li></a>
         {{/each}}
     </ul>
+</template>
+
+<template name="modal">
+    <div id="info">
+        <h1>{{info.Title}}</h1>
+        <h2>{{info.Year}}</h2>
+        <p>{{info.Plot}}</p>
+        <img src="{{info.Poster}}" alt="{{info.Title}}">
+    </div>
+    <button id="add-movie">Add this movie</button>
+</template>
+
+<template name="movies">
+    {{#each movies}}
+        <img src="{{Poster}}" alt="{{Title}}">
+    {{/each}}
 </template>
