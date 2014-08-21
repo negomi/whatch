@@ -77,6 +77,7 @@ if (Meteor.isClient) {
       }
 
       if (pressed(key) === 'down') {
+        event.preventDefault();
         if (!_.isEqual(Session.get('searchResults'), []))
           template.lastNode.firstElementChild.focus();
       }
@@ -85,7 +86,7 @@ if (Meteor.isClient) {
       event.preventDefault();
       var key = event.which;
 
-      if (key === 1 || pressed(key) === 'enter') {
+      if (event.type === 'click' || pressed(key) === 'enter') {
         var imdbId = event.target.dataset.imdbid || event.target.parentNode.dataset.imdbid;
         fetchDetails(imdbId);
         Session.set('searchResults', []);
@@ -93,6 +94,7 @@ if (Meteor.isClient) {
       }
 
       if (pressed(key) === 'down') {
+        event.preventDefault();
         if (document.activeElement.nextElementSibling)
           document.activeElement.nextElementSibling.focus();
       }
