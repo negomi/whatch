@@ -2,6 +2,7 @@
   "packages": {
     "scss": {},
     "bourbon": {},
-    "neat": {}
+    "neat": {},
+    "normalize.css": {}
   }
 }
