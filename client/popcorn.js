@@ -56,6 +56,7 @@ if (Meteor.isClient) {
   Template.search.events({
     'keyup #search-form': function(event, template) {
       var key = event.which;
+
       if (pressed(key) === 'alphNum' || pressed(key) === 'delete') {
         var searchTerm = template.find('#search-form').value;
         if (searchTerm.isEmpty()) {
@@ -67,15 +68,18 @@ if (Meteor.isClient) {
     },
     'keydown #search-form': function(event, template) {
       var key = event.which;
+
+      // Bring up results of first movie
       if (pressed(key) === 'enter') {
+        event.preventDefault();
         if (!_.isEqual(Session.get('searchResults'), [])) {
           // TODO bring up info of first result
-          event.preventDefault();
           fetchDetails(template.lastNode.firstElementChild.dataset.imdbid);
           Session.set('searchResults', []);
         }
       }
 
+      // Focus first movie in list
       if (pressed(key) === 'down') {
         event.preventDefault();
         if (!_.isEqual(Session.get('searchResults'), []))
@@ -83,27 +87,33 @@ if (Meteor.isClient) {
       }
     },
     'click, keydown #results': function(event, template) {
-      event.preventDefault();
       var key = event.which;
 
+      // Bring up movie info
       if (event.type === 'click' || pressed(key) === 'enter') {
+        event.preventDefault();
         var imdbId = event.target.dataset.imdbid || event.target.parentNode.dataset.imdbid;
         fetchDetails(imdbId);
         Session.set('searchResults', []);
         $('#search-form').val('');
       }
 
+      // Focus next movie if it exists
       if (pressed(key) === 'down') {
         event.preventDefault();
-        if (document.activeElement.nextElementSibling)
+        if (document.activeElement.nextElementSibling) {
           document.activeElement.nextElementSibling.focus();
+        }
       }
 
+      // Focus previous movie or search form
       if (pressed(key) === 'up') {
-        if (document.activeElement.previousElementSibling)
+        event.preventDefault();
+        if (document.activeElement.previousElementSibling) {
           document.activeElement.previousElementSibling.focus();
-        else
+        } else {
           $('#search-form').focus();
+        }
       }
     }
   });
@@ -114,6 +124,8 @@ if (Meteor.isClient) {
 
   Template.modal.events({
     'click #add-movie': function(event, template) {
+      event.preventDefault();
+
       // add to DB
       Movies.insert(Session.get('movieInfo'), function(err, id) {
         if (err) console.log(err);
