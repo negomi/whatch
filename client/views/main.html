@@ -3,21 +3,29 @@
 </head>
 
 <body>
-    <div id="search">
+    <header id="search" class="header">
         {{>search}}
-    </div>
+    </header>
 
-    <div id="modal">
-        {{>modal}}
-    </div>
+    <nav class="sidebar">
+        <ul>
+            <li><a href="">Item 1</a></li>
+            <li><a href="">Item 2</a></li>
+            <li><a href="">Item 3</a></li>
+        </ul>
+    </nav>
 
-    <div id="movies">
+    <main id="movies" class="main">
         {{>movies}}
+    </main>
+
+    <div id="modal" class="modal">
+        {{>modal}}
     </div>
 </body>
 
 <template name="search">
-    <input type="text" id="search-form" />
+    <input type="text" id="search-form" class="search" placeholder="Search for a movie..." />
 
     <ul id="results">
         {{#each results}}
@@ -33,7 +41,7 @@
         <p>{{info.Plot}}</p>
         <img src="{{info.Poster}}" alt="{{info.Title}}">
     </div>
-    <button id="add-movie">Add this movie</button>
+    <button id="add-movie">Add {{info.Title}}</button>
 </template>
 
 <template name="movies">

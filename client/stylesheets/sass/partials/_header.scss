@@ -1,0 +1,34 @@
+.header {
+    @include span-columns(12);
+    @include position(fixed, 0px 0px auto 0px);
+    
+    background: $base-accent-color;
+    height: $header-height;
+    padding-right: em(10);
+
+    @include media($medium-screen-up) {
+        padding-right: em(15);
+    }
+    @include media($large-screen-up) {
+        padding-right: em(20);
+    }
+}
+
+input.search {
+    @include span-columns(10);
+    @include shift(2);
+    @include border-top-radius(5px);
+    @include border-bottom-radius(5px);
+
+    margin-bottom: em(20);
+    margin-top: em(20);
+    padding: em(20) em(10);
+
+    @include media($medium-screen-up) {
+        @include span-columns(6 of 10);
+    }
+
+    @include media($large-screen-up) {
+        @include span-columns(4 of 10);
+    }
+}

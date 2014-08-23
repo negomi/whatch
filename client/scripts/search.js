@@ -1,32 +1,29 @@
 if (Meteor.isClient) {
 
-  Movies = new Meteor.Collection('movies');
-  Meteor.subscribe('movies');
-
-  String.prototype.isEmpty = function() {
-    return this.length === 0 || !this.trim();
-  };
-
+  // Determine which key was pressed
   var pressed = function(key) {
-    if (key >= 48 && key <= 90)
+    if (key >= 48 && key <= 90) {
       return 'alphNum';
-    else if (key === 38)
+    } else if (key === 38) {
       return 'up';
-    else if (key === 40)
+    } else if (key === 40) {
       return 'down';
-    else if (key === 13)
+    } else if (key === 13) {
       return 'enter';
-    else if (key === 8)
+    } else if (key === 8) {
       return 'delete';
+    }
   };
 
+  // Search OMDbAPI for movie title
   var searchApi = function(title) {
     $.ajax({
       url: 'http://www.omdbapi.com/?s=' + title,
       dataType: 'json',
       success: function(data, textStatus, jqXHR) {
-        if ('undefined' !== typeof data.Search)
+        if ('undefined' !== typeof data.Search) {
           Session.set('searchResults', data.Search);
+        }
       },
       error: function(jqXHR, textStatus, errorThrown) {
         console.error(errorThrown.message);
@@ -34,6 +31,7 @@ if (Meteor.isClient) {
     });
   };
 
+  // Fetch movie details based on IMDbID
   var fetchDetails = function(imdbId) {
     // TODO if in DB, retrieve from there
     $.ajax({
@@ -49,6 +47,7 @@ if (Meteor.isClient) {
     });
   };
 
+  // Populate autocomplete with results 
   Template.search.results = function() {
     return Session.get('searchResults');
   };
@@ -57,6 +56,7 @@ if (Meteor.isClient) {
     'keyup #search-form': function(event, template) {
       var key = event.which;
 
+      // Update results based on search field
       if (pressed(key) === 'alphNum' || pressed(key) === 'delete') {
         var searchTerm = template.find('#search-form').value;
         if (searchTerm.isEmpty()) {
@@ -64,35 +64,32 @@ if (Meteor.isClient) {
         } else {
           searchApi(searchTerm);
         }
-      }
-    },
-    'keydown #search-form': function(event, template) {
-      var key = event.which;
-
-      // Bring up results of first movie
-      if (pressed(key) === 'enter') {
+      } else {
         event.preventDefault();
-        if (!_.isEqual(Session.get('searchResults'), [])) {
-          // TODO bring up info of first result
-          fetchDetails(template.lastNode.firstElementChild.dataset.imdbid);
-          Session.set('searchResults', []);
+
+        // Bring up results of first movie
+        if (pressed(key) === 'enter') {
+          if (!_.isEqual(Session.get('searchResults'), [])) {
+            fetchDetails(template.lastNode.firstElementChild.dataset.imdbid);
+            Session.set('searchResults', []);
+          }
         }
-      }
 
-      // Focus first movie in list
-      if (pressed(key) === 'down') {
-        event.preventDefault();
-        if (!_.isEqual(Session.get('searchResults'), []))
-          template.lastNode.firstElementChild.focus();
+        // Focus first movie in list
+        if (pressed(key) === 'down') {
+          if (!_.isEqual(Session.get('searchResults'), []))
+            template.lastNode.firstElementChild.focus();
+        }
       }
     },
     'click, keydown #results': function(event, template) {
       var key = event.which;
+      event.preventDefault();
 
       // Bring up movie info
       if (event.type === 'click' || pressed(key) === 'enter') {
-        event.preventDefault();
-        var imdbId = event.target.dataset.imdbid || event.target.parentNode.dataset.imdbid;
+        var imdbId = event.target.dataset.imdbid ||
+          event.target.parentNode.dataset.imdbid;
         fetchDetails(imdbId);
         Session.set('searchResults', []);
         $('#search-form').val('');
@@ -100,7 +97,6 @@ if (Meteor.isClient) {
 
       // Focus next movie if it exists
       if (pressed(key) === 'down') {
-        event.preventDefault();
         if (document.activeElement.nextElementSibling) {
           document.activeElement.nextElementSibling.focus();
         }
@@ -108,7 +104,6 @@ if (Meteor.isClient) {
 
       // Focus previous movie or search form
       if (pressed(key) === 'up') {
-        event.preventDefault();
         if (document.activeElement.previousElementSibling) {
           document.activeElement.previousElementSibling.focus();
         } else {
@@ -117,25 +112,4 @@ if (Meteor.isClient) {
       }
     }
   });
-
-  Template.modal.info = function() {
-    return Session.get('movieInfo');
-  };
-
-  Template.modal.events({
-    'click #add-movie': function(event, template) {
-      event.preventDefault();
-
-      // add to DB
-      Movies.insert(Session.get('movieInfo'), function(err, id) {
-        if (err) console.log(err);
-        Session.set('movieInfo', []);
-        // close modal
-      });
-    }
-  });
-
-  Template.movies.movies = function() {
-    return Movies.find({}).fetch().reverse();
-  };
 }

@@ -1,0 +1,6 @@
+.main {
+    @include span-columns(10);
+    @include shift(2);
+
+    margin-top: $header-height + em(30);
+}

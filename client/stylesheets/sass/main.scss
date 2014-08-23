@@ -1,3 +1,9 @@
 @import "packages/bourbon/bourbon";
 @import "base/base";
 @import "packages/neat/neat";
+
+@import "partials/variables";
+@import "partials/header";
+@import "partials/sidebar";
+@import "partials/main";
+@import "partials/modal";

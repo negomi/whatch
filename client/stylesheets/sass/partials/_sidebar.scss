@@ -1,0 +1,31 @@
+$sidebar-border-color: $dark-gray;
+$sidebar-background: lighten($sidebar-border-color, 5);
+$sidebar-color: #fff;
+$sidebar-border: 1px solid $sidebar-border-color;
+$sidebar-background-hover: $base-accent-color;
+$sidebar-color-hover: #fff;
+
+.sidebar {
+  @include span-columns(2);
+  @include omega;
+
+  @include position(fixed, 0px auto 0px 0px);
+  
+  background: $sidebar-background;
+  z-index: 999999;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+
+  li a {
+    border-bottom: $sidebar-border;
+    color: $sidebar-color;
+    display: block;
+    font-weight: bold;
+    padding: 1em;
+
+    &:hover {
+      background-color: $sidebar-background-hover;
+      color: $sidebar-color-hover;
+    }
+  }
+}
