@@ -1,9 +1,11 @@
 @import "packages/bourbon/bourbon";
 @import "base/base";
 @import "packages/neat/neat";
+@import 'packages/font-awesome-sass/font-awesome';
 
 @import "partials/variables";
+@import "partials/mixins";
 @import "partials/header";
 @import "partials/sidebar";
-@import "partials/main";
+@import "partials/content";
 @import "partials/modal";

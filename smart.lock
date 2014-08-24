@@ -5,7 +5,8 @@
       "scss": {},
       "bourbon": {},
       "neat": {},
-      "normalize.css": {}
+      "normalize.css": {},
+      "font-awesome-sass": {}
     },
     "packages": {
       "scss": {
@@ -27,6 +28,11 @@
         "git": "https://github.com/rithis/meteor-normalize.css",
         "tag": "v2.0.1",
         "commit": "671aba13223dd7d7ec1d26a6b2461943d7c4fa18"
+      },
+      "font-awesome-sass": {
+        "git": "https://github.com/reywood/meteor-font-awesome-sass.git",
+        "tag": "v4.1.0-1",
+        "commit": "64b05d3c7654cf83b9f85240d1a340cbe1d55123"
       }
     }
   }

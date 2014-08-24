@@ -1,0 +1,75 @@
+.main {
+    @include span-columns(10);
+    @include shift(2);
+
+    margin-top: $header-height + em(30);
+    // padding-right: em(30);
+}
+
+@mixin grid-item-columns($columns) {
+  width: (100% / 12) * $columns;
+}
+
+.grid-items {
+  $grid-items-background: $base-background-color;
+  $grid-item-border-size: 9px;
+  $grid-item-columns: 3;
+  $grid-item-height: 28em;
+
+  @include clearfix;
+    
+  .grid-item {
+    @include transition (all 0.2s ease-in-out);
+
+    // background: black;
+    border-bottom: $grid-item-border-size solid $grid-items-background;
+    border-right: $grid-item-border-size solid $grid-items-background;
+    // cursor: pointer;
+    float: left;
+    height: $grid-item-height;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+
+    @include media($large-screen) {
+      @include grid-item-columns($grid-item-columns);
+    }
+  }
+}
+
+.image-wrapper img {
+    @include absolute-center;
+}
+
+.hover-info {
+    // @include transition (all 0.2s ease-in-out);
+    @include position(absolute, 0px 0px 0px 0px);
+
+    background: transparentize(black, .2);
+    display: none;
+    padding: 1em 1.5em;
+
+    h4 {
+        color: white;
+        margin-bottom: .1em;
+    }
+
+    h5 {
+        color: transparentize(white, .3);
+        margin-bottom: .5em;        
+    }
+
+    p {
+        color: transparentize(white, .3);
+    }
+
+    .delete {
+        @include position(absolute, auto 2em 2em auto);
+    }
+
+    .imdb {
+        @include position(absolute, auto auto 2em auto);
+
+        font-weight: bold;
+    }
+}

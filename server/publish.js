@@ -8,7 +8,10 @@ if (Meteor.isServer) {
     // });
 
     Movies.allow({
-      insert: function(userId, doc) {
+      insert: function() {
+        return true;
+      },
+      remove: function() {
         return true;
       }
     });
