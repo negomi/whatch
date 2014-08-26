@@ -25,13 +25,15 @@
 </body>
 
 <template name="search">
-    <input type="text" id="search-form" class="search" placeholder="Search for a movie..." />
+    <div class="autocomplete-wrapper">
+        <input type="text" id="search-form" class="search" placeholder="Search for a movie..." />
 
-    <ul id="results">
-        {{#each results}}
-            <a href="#" data-imdbID="{{imdbID}}"><li>{{Title}} ({{Year}})</li></a>
-        {{/each}}
-    </ul>
+        <ul id="results" class="results">
+            {{#each results}}
+            <li class="result"><a href="#" data-imdbID="{{imdbID}}">{{Title}} ({{Year}})</a></li>
+            {{/each}}
+        </ul>
+    </div>
 </template>
 
 <template name="modal">

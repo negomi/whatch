@@ -3,10 +3,6 @@ if (Meteor.isClient) {
   Movies = new Meteor.Collection('movies');
   Meteor.subscribe('movies');
 
-  String.prototype.isEmpty = function() {
-    return this.length === 0 || !this.trim();
-  };
-
   Template.modal.info = function() {
     return Session.get('movieInfo');
   };
@@ -23,8 +19,4 @@ if (Meteor.isClient) {
       });
     }
   });
-
-  Template.movies.movies = function() {
-    return Movies.find({}).fetch().reverse();
-  };
 }
