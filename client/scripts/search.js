@@ -38,6 +38,15 @@ if (Meteor.isClient) {
     });
   };
 
+  // Show modal and disable other parts of UI
+  var showModal = function(data) {
+    Session.set('movieInfo', data);
+    $('.overlay').fadeIn('fast');
+    $('.modal').slideDown('fast');
+    $('body').css({overflow: 'hidden'});
+    $('input').prop('disabled', true);
+  };
+
   // Fetch movie details based on IMDbID
   var fetchDetails = function(imdbId) {
     // TODO if in DB, retrieve from there
@@ -45,8 +54,7 @@ if (Meteor.isClient) {
       url: 'http://www.omdbapi.com/?i=' + imdbId,
       dataType: 'json',
       success: function(data, textStatus, jqXHR) {
-        // show modal overlay with movie data
-        Session.set('movieInfo', data);
+        showModal(data);
       },
       error: function(jqXHR, textStatus, errorThrown) {
         console.error(errorThrown.message);
@@ -78,6 +86,7 @@ if (Meteor.isClient) {
         }
       }
     },
+    
     'keydown #search-form': function(event, template) {
       var key = event.which;
 
@@ -99,6 +108,7 @@ if (Meteor.isClient) {
         }
       }
     },
+
     'click, keydown #results': function(event, template) {
       var key = event.which;
       var click = event.type === 'click';
@@ -106,9 +116,10 @@ if (Meteor.isClient) {
 
       // Bring up movie info
       if (click || pressed(key) === 'enter' || pressed(key) === 'tab') {
-          $(document.activeElement.parentNode).removeClass('active');
           var imdbId = event.target.dataset.imdbid ||
             event.target.parentNode.dataset.imdbid;
+          if (!imdbId) return;
+          $(document.activeElement.parentNode).removeClass('active');
           fetchDetails(imdbId);
           clearSearch();
         }
