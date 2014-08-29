@@ -1,0 +1,10 @@
+<template name="modal">
+    <span class="modal-close"></span>
+    <div id="info">
+        <h1>{{info.Title}}</h1>
+        <h4>{{info.Year}}</h4>
+        <p>{{info.Plot}}</p>
+        <button id="add-movie">Add {{info.Title}}</button>
+    </div>
+    <img src="{{info.Poster}}" alt="{{info.Title}}">
+</template>
