@@ -38,15 +38,6 @@ if (Meteor.isClient) {
     });
   };
 
-  // Show modal and disable other parts of UI
-  var showModal = function(data) {
-    Session.set('movieInfo', data);
-    $('.overlay').fadeIn('fast');
-    $('.modal').slideDown('fast');
-    $('body').css({overflow: 'hidden'});
-    $('input').prop('disabled', true);
-  };
-
   // Fetch movie details based on IMDbID
   var fetchDetails = function(imdbId) {
     // TODO if in DB, retrieve from there
@@ -60,6 +51,15 @@ if (Meteor.isClient) {
         console.error(errorThrown.message);
       }
     });
+  };
+
+  // Show modal and disable other parts of UI
+  var showModal = function(data) {
+    Session.set('movieInfo', data);
+    $('.overlay').fadeIn('fast');
+    $('.modal').slideDown('fast');
+    $('body').css({overflow: 'hidden'});
+    $('input').prop('disabled', true);
   };
 
   // Clear results and reset search field
@@ -97,6 +97,7 @@ if (Meteor.isClient) {
           fetchDetails(template.find('.result a').dataset.imdbid);
           clearSearch();
         }
+        return;
       }
 
       // Focus first movie in list
@@ -106,6 +107,7 @@ if (Meteor.isClient) {
           template.find('.result a').focus();
           $(document.activeElement.parentNode).addClass('active');
         }
+        return;
       }
     },
 
@@ -122,6 +124,7 @@ if (Meteor.isClient) {
           $(document.activeElement.parentNode).removeClass('active');
           fetchDetails(imdbId);
           clearSearch();
+          return;
         }
 
       // Focus next movie if it exists
@@ -132,6 +135,7 @@ if (Meteor.isClient) {
           $(next).addClass('active');
           next.firstChild.focus();
         }
+        return;
       }
 
       // Focus previous movie or search form
@@ -144,6 +148,7 @@ if (Meteor.isClient) {
         } else {
           template.find("#search-form").focus();
         }
+        return;
       }
     }
   });
