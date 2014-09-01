@@ -11,8 +11,8 @@
     "packages": {
       "scss": {
         "git": "https://github.com/fourseven/meteor-scss.git",
-        "tag": "v0.9.3",
-        "commit": "185f3b2787fb85e653f7b7bf603d1493ed14943d"
+        "tag": "v0.9.4",
+        "commit": "b5ebfe2bb8a58a03966b6f49e185544a0233ddb0"
       },
       "bourbon": {
         "git": "https://github.com/chicagogrooves/meteor-bourbon.git",
