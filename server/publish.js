@@ -1,18 +1,18 @@
 if (Meteor.isServer) {
-  Meteor.startup(function () {
-    // code to run on server at startup
+
+  Meteor.startup(function() {
     Movies = new Meteor.Collection('movies');
 
-    // Movies.publish('movies', function() {
-    //   return Movies.find({});
-    // });
+    Meteor.publish('movies', function() {
+      return this.userId ? Movies.find({owner: this.userId}) : null;
+    });
 
     Movies.allow({
-      insert: function() {
-        return true;
+      insert: function(userId, movie) {
+        return (userId && movie.owner === userId);
       },
-      remove: function() {
-        return true;
+      remove: function(userId, movie) {
+        return (userId && movie.owner === userId);
       }
     });
   });

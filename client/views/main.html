@@ -3,28 +3,32 @@
 </head>
 
 <body>
-    <div id="landing-page">
-        {{> loginButtons align="right"}}
-    </div>
+    {{#if currentUser}}
+        <header class="header">
+            {{>search}}
+        </header>
 
-    <header id="search" class="header">
-        {{>search}}
-    </header>
+        <nav class="sidebar">
+            <ul>
+                <li><a href="">Item 1</a></li>
+                <li><a href="">Item 2</a></li>
+                <li><a href="">Item 3</a></li>
+            </ul>
 
-    <nav class="sidebar">
-        <ul>
-            <li><a href="">Item 1</a></li>
-            <li><a href="">Item 2</a></li>
-            <li><a href="">Item 3</a></li>
-        </ul>
-    </nav>
+            {{>logout}}
+        </nav>
 
-    <main id="movies" class="main">
-        {{>movies}}
-    </main>
+        <main class="main">
+            {{>movies}}
+        </main>
 
-    <div class="overlay"></div>
-    <div id="modal" class="modal">
-        {{>modal}}
-    </div>
+        <div class="overlay"></div>
+        <div class="modal">
+            {{>modal}}
+        </div>
+    {{else}}
+        <div class="landing-page">
+            {{> loginButtons}}
+        </div>
+    {{/if}}
 </body>

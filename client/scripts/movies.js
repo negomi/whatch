@@ -1,7 +1,7 @@
 if (Meteor.isClient) {
 
     Template.movies.movies = function() {
-        return Movies.find({}).fetch().reverse();
+        return Movies.find({owner: Meteor.userId()}, {sort: {added: -1}});
     };
 
     Template.movies.events({
@@ -13,7 +13,9 @@ if (Meteor.isClient) {
         },
         'click .delete': function(event, template) {
             event.preventDefault();
-            Movies.remove(this._id);
+            Movies.remove(this._id, function(err, id) {
+                if (err) console.log(err);
+            });
         }
     });
 }

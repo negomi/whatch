@@ -21,11 +21,17 @@ $sidebar-color-hover: #fff;
     color: $sidebar-color;
     display: block;
     font-weight: bold;
-    padding: 1em;
+    padding: em(16);
 
     &:hover {
       background-color: $sidebar-background-hover;
       color: $sidebar-color-hover;
     }
   }
+}
+
+.logout {
+  position: absolute;
+  bottom: em(16);
+  right: em(16);
 }
