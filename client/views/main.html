@@ -1,11 +1,13 @@
 <head>
-    <title>popcorn</title>
+    <title>whatch.</title>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:700' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
     {{#if currentUser}}
         <header class="header">
             {{>search}}
+            <span class="logo">whatch.</span>
         </header>
 
         <nav class="sidebar">
@@ -27,8 +29,13 @@
             {{>modal}}
         </div>
     {{else}}
+        <div class="bg"></div>
         <div class="landing-page">
-            {{> loginButtons}}
+            <div class="center-container">
+                <h1 class="logo-big">whatch.</h1>
+                <h2 class="subheading">a helpful to-do list for movies</h2>
+                {{> loginButtons}}
+            </div>
         </div>
     {{/if}}
 </body>

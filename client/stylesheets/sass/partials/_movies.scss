@@ -11,30 +11,30 @@
 }
 
 .grid-items {
-  $grid-items-background: $base-background-color;
-  $grid-item-border-size: 9px;
-  $grid-item-columns: 3;
-  $grid-item-height: 28em;
+    $grid-items-background: $base-background-color;
+    $grid-item-border-size: 20px;
+    $grid-item-columns: 3;
+    $grid-item-height: 28em;
 
-  @include clearfix;
-    
-  .grid-item {
-    @include transition (all 0.2s ease-in-out);
+    @include clearfix;
 
-    // background: black;
-    border-bottom: $grid-item-border-size solid $grid-items-background;
-    border-right: $grid-item-border-size solid $grid-items-background;
-    // cursor: pointer;
-    float: left;
-    height: $grid-item-height;
-    overflow: hidden;
-    position: relative;
-    width: 100%;
+    .grid-item {
+        @include transition (all 0.2s ease-in-out);
 
-    @include media($large-screen) {
-      @include grid-item-columns($grid-item-columns);
+        background: black;
+        border-bottom: $grid-item-border-size solid $grid-items-background;
+        border-right: $grid-item-border-size solid $grid-items-background;
+        // cursor: pointer;
+        float: left;
+        height: $grid-item-height;
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+
+        @include media($large-screen) {
+            @include grid-item-columns($grid-item-columns);
+        }
     }
-  }
 }
 
 .image-wrapper img {

@@ -61,8 +61,15 @@ input.search {
         color: $base-font-color;
 
         &:focus {
-            color: white;
             font-weight: bold;
         }
     }
+}
+
+.logo {
+    font-family: 'Raleway', sans-serif;
+    font-size: em(48);
+    position: absolute;
+    right: em(10);
+    line-height: 100px;
 }
