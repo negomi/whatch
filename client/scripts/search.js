@@ -1,11 +1,11 @@
 if (Meteor.isClient) {
 
-  // Check for empty string
+  // Check for an empty string.
   String.prototype.isEmpty = function() {
     return this.length === 0 || !this.trim();
   };
 
-  // Determine which key was pressed
+  // Determine which key was pressed.
   var pressed = function(key) {
     if (key >= 48 && key <= 90) {
       return 'alphNum';
@@ -22,7 +22,7 @@ if (Meteor.isClient) {
     }
   };
 
-  // Search OMDbAPI for movie title
+  // Search the OMDbAPI for a movie title.
   var searchApi = function(title) {
     $.ajax({
       url: 'http://www.omdbapi.com/?s=' + title,
@@ -38,9 +38,9 @@ if (Meteor.isClient) {
     });
   };
 
-  // Fetch movie details based on IMDbID
+  // Fetch a movie's details based on its IMDbID.
   var fetchDetails = function(imdbId) {
-    // TODO if in DB, retrieve from there
+    // TODO: if in DB, retrieve from there
     $.ajax({
       url: 'http://www.omdbapi.com/?i=' + imdbId,
       dataType: 'json',
@@ -53,7 +53,7 @@ if (Meteor.isClient) {
     });
   };
 
-  // Show modal and disable other parts of UI
+  // Show modal window and disable other parts of the UI.
   var showModal = function(data) {
     Session.set('movieInfo', data);
     $('.overlay').fadeIn('fast');
@@ -62,13 +62,13 @@ if (Meteor.isClient) {
     $('input').prop('disabled', true);
   };
 
-  // Clear results and reset search field
+  // Clear results and reset the search field.
   var clearSearch = function() {
     Session.set('searchResults', []);
     $("#search-form").val('');
   };
 
-  // Populate autocomplete with results 
+  // Populate the autocomplete with results.
   Template.search.results = function() {
     return Session.get('searchResults');
   };
@@ -76,7 +76,7 @@ if (Meteor.isClient) {
   Template.search.events({
     'keyup #search-form': function(event, template) {
       var key = event.which;
-      // Update results based on search field
+      // Update the results based on search field contents.
       if (pressed(key) === 'alphNum' || pressed(key) === 'delete') {
         var searchTerm = template.find('#search-form').value;
         if (searchTerm.isEmpty()) {
@@ -90,7 +90,7 @@ if (Meteor.isClient) {
     'keydown #search-form': function(event, template) {
       var key = event.which;
 
-      // Bring up results of first movie
+      // Bring up the results of the first movie.
       if (pressed(key) === 'enter') {
         event.preventDefault();
         if (!_.isEqual(Session.get('searchResults'), [])) {
@@ -100,7 +100,7 @@ if (Meteor.isClient) {
         return;
       }
 
-      // Focus first movie in list
+      // Focus first movie in the list.
       if (pressed(key) === 'down' || pressed(key) === 'tab') {
         event.preventDefault();
         if (!_.isEqual(Session.get('searchResults'), [])) {
@@ -116,7 +116,7 @@ if (Meteor.isClient) {
       var click = event.type === 'click';
       event.preventDefault();
 
-      // Bring up movie info
+      // Bring up the movie info.
       if (click || pressed(key) === 'enter' || pressed(key) === 'tab') {
           var imdbId = event.target.dataset.imdbid ||
             event.target.parentNode.dataset.imdbid;
@@ -127,7 +127,7 @@ if (Meteor.isClient) {
           return;
         }
 
-      // Focus next movie if it exists
+      // Focus the next movie if it exists.
       if (pressed(key) === 'down') {
         var next = document.activeElement.parentNode.nextElementSibling;
         if (next) {
@@ -138,7 +138,7 @@ if (Meteor.isClient) {
         return;
       }
 
-      // Focus previous movie or search form
+      // Focus the previous movie if it exists, or the search form.
       if (pressed(key) === 'up') {
         $(document.activeElement.parentNode).removeClass('active');
         var prev = document.activeElement.parentNode.previousElementSibling;
@@ -153,7 +153,7 @@ if (Meteor.isClient) {
     }
   });
 
-  // Abandon search if user clicks away from the autocomplete
+  // Abandon the search if the user clicks away from the autocomplete.
   $(document).on('click', function(event, template) {
     var clicked = event.target.id;
     if (clicked !== 'results' || clicked !== 'search-form') {
