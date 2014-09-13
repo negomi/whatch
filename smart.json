@@ -1,9 +1,0 @@
-{
-  "packages": {
-    "scss": {},
-    "bourbon": {},
-    "neat": {},
-    "normalize.css": {},
-    "font-awesome-sass": {}
-  }
-}

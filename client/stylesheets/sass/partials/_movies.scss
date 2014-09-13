@@ -24,7 +24,6 @@
         background: black;
         border-bottom: $grid-item-border-size solid $grid-items-background;
         border-right: $grid-item-border-size solid $grid-items-background;
-        // cursor: pointer;
         float: left;
         height: $grid-item-height;
         overflow: hidden;
@@ -42,7 +41,6 @@
 }
 
 .hover-info {
-    // @include transition (all 0.2s ease-in-out);
     @include position(absolute, 0px 0px 0px 0px);
 
     background: transparentize(black, .2);

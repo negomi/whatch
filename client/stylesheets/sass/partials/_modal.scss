@@ -46,7 +46,7 @@ $modal-close-color: gray;
 }
 
 .modal-close {
-    @include position(absolute, ($modal-padding /2) ($modal-padding /2) 0 0);
+    @include position(absolute, ($modal-padding /2) ($modal-padding /2) auto auto);
     @include size(1.5em);
     cursor: pointer;
     background: $modal-background;

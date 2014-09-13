@@ -1,7 +1,7 @@
-@import "packages/bourbon/bourbon";
+@import "http://necolas.github.io/normalize.css/3.0.1/normalize.css";
+@import "bourbon/bourbon";
+@import 'neat/neat';
 @import "base/base";
-@import "packages/neat/neat";
-@import 'packages/font-awesome-sass/font-awesome';
 
 @import "partials/variables";
 @import "partials/mixins";

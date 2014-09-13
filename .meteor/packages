@@ -5,10 +5,6 @@
 
 standard-app-packages
 insecure
-scss
-bourbon
-neat
-normalize.css
-font-awesome-sass
 accounts-ui
 accounts-facebook
+fourseven:scss
