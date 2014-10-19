@@ -1,34 +1,34 @@
 .bg {
-    background-image: url('/cinema.jpg');
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    z-index: -99999;
+  background-image: url('/cinema.jpg');
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -99999;
 }
 
 .center-container {
-    position: relative;
-    text-align: center;
-    top: 1.5em;
+  position: relative;
+  text-align: center;
+  top: 1.5em;
 }
 
 .logo-big {
-    color: $yellow;
-    font-family: 'Raleway', sans-serif;
-    font-size: 10em;
-    margin: none;
+  color: $yellow;
+  font-family: 'Raleway', sans-serif;
+  font-size: 10em;
+  margin: none;
 }
 
 .subheading {
-    margin-bottom: 1em;
+  margin-bottom: 1em;
 }
 
 #login-buttons .login-button, .accounts-dialog .login-button {
-    font-size: 100%;
-    padding: 10px 20px;
+  font-size: 100%;
+  padding: 10px 20px;
 }
 
 #login-buttons .login-image {
-    left: 15px;
-    top: 15px;
+  left: 15px;
+  top: 15px;
 }

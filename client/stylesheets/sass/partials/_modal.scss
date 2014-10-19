@@ -1,11 +1,11 @@
 .overlay {
-    @include position(fixed, 0px 0px 0px 0px);
+  @include position(fixed, 0px 0px 0px 0px);
 
-    background-color: transparentize(black, 0.2);
-    display: none;
-    height: 100%;
-    width: 100%;
-    z-index: 999999;
+  background-color: transparentize(black, 0.2);
+  display: none;
+  height: 100%;
+  width: 100%;
+  z-index: 999999;
 }
 
 $modal-padding: 3em;
@@ -13,70 +13,70 @@ $modal-background: $base-background-color;
 $modal-close-color: gray;
 
 .modal {
-    @include position(fixed, 0px 0px 0px 0px);
+  @include position(fixed, 0px 0px 0px 0px);
 
-    border-radius: $base-border-radius;
-    background: $modal-background;
-    display: none;
-    margin: auto;
-    max-height: 95%;
+  border-radius: $base-border-radius;
+  background: $modal-background;
+  display: none;
+  margin: auto;
+  max-height: 95%;
 
-    overflow: auto;
-    width: 95%;
-    padding: $modal-padding /2;
-    margin-top: .6em;
-    z-index: 999999;
+  overflow: auto;
+  width: 95%;
+  padding: $modal-padding /2;
+  margin-top: .6em;
+  z-index: 999999;
 
-    img {
-        float: right;
-        margin-right: 1.5em;
-    }
+  img {
+    float: right;
+    margin-right: 1.5em;
+  }
 
-    @include media($medium-screen) {
-        padding: $modal-padding;
-        width: 70%;
-        max-height: 70%;
-        margin-top: 8em;
-    }
+  @include media($medium-screen) {
+    padding: $modal-padding;
+    width: 70%;
+    max-height: 70%;
+    margin-top: 8em;
+  }
 
-    @include media($large-screen) {
-        width: 60%;
-        margin-top: 8em;
-    }
+  @include media($large-screen) {
+    width: 60%;
+    margin-top: 8em;
+  }
 }
 
 .modal-close {
-    @include position(absolute, ($modal-padding /2) ($modal-padding /2) auto auto);
-    @include size(1.5em);
-    cursor: pointer;
-    background: $modal-background;
+  @include position(absolute, ($modal-padding /2) ($modal-padding /2) auto auto);
+  @include size(1.5em);
+  cursor: pointer;
+  background: $modal-background;
 
-    &:after,
-    &:before {
-        @include position(absolute, 3px 3px 0 50%);
-        @include transform(rotate(45deg));
-        @include size(.15em 1.5em);
-        background: $modal-close-color;
-        content: '';
-        display: block;
-        margin: -3px 0 0 -1px;
-    }
+  &:after,
+  &:before {
+    @include position(absolute, 3px 3px 0 50%);
+    @include transform(rotate(45deg));
+    @include size(.15em 1.5em);
+    background: $modal-close-color;
+    content: '';
+    display: block;
+    margin: -3px 0 0 -1px;
+  }
 
-    &:hover:after,
-    &:hover:before {
-        background: darken($modal-close-color, 10);
-    }
+  &:hover:after,
+  &:hover:before {
+    background: darken($modal-close-color, 10);
+  }
 
-    &:before {
-        @include transform(rotate(-45deg));
-    }
+  &:before {
+    @include transform(rotate(-45deg));
+  }
 }
 
 #info {
-    width: 50%;
-    float: left;
+  width: 50%;
+  float: left;
 
-    p {
-        margin: 1em 0;
-    }
+  p {
+    margin: 1em 0;
+  }
 }

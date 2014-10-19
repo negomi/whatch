@@ -1,75 +1,75 @@
 .header {
-    @include span-columns(12);
-    @include position(fixed, 0px 0px auto 0px);
-    
-    background: $base-accent-color;
-    height: $header-height;
-    // padding-right: em(10);
-    z-index: 99999;
+  @include span-columns(12);
+  @include position(fixed, 0px 0px auto 0px);
 
-    @include media($medium-screen-up) {
-        // padding-right: em(15);
-    }
-    @include media($large-screen-up) {
-        // padding-right: em(20);
-    }
+  background: $base-accent-color;
+  height: $header-height;
+  // padding-right: em(10);
+  z-index: 99999;
+
+  @include media($medium-screen-up) {
+    // padding-right: em(15);
+  }
+  @include media($large-screen-up) {
+    // padding-right: em(20);
+  }
 }
 
 .autocomplete-wrapper {
-    @include span-columns(10);
-    @include shift(2);
+  @include span-columns(10);
+  @include shift(2);
 
-    @include media($medium-screen-up) {
-        @include span-columns(6 of 10);
-    }
+  @include media($medium-screen-up) {
+    @include span-columns(6 of 10);
+  }
 
-    @include media($large-screen-up) {
-        @include span-columns(4 of 10);
-    }
+  @include media($large-screen-up) {
+    @include span-columns(4 of 10);
+  }
 }
 
 input.search {
-    @include border-top-radius(0);
-    @include border-bottom-radius(0);
+  @include border-top-radius(0);
+  @include border-bottom-radius(0);
 
-    border-bottom: none;
-    margin-bottom: 0;
-    margin-top: em(20);
-    padding: em(20) em(10);
+  border-bottom: none;
+  margin-bottom: 0;
+  margin-top: em(20);
+  padding: em(20) em(10);
 }
 
 .results {
-    li {
-        background: white;
-        border-bottom: 1px solid $base-border-color;
-        border-left: 1px solid $base-border-color;
-        border-right: 1px solid $base-border-color;
-        cursor: pointer;
-        padding: em(10);
+  li {
+    background: white;
+    border-bottom: 1px solid $base-border-color;
+    border-left: 1px solid $base-border-color;
+    border-right: 1px solid $base-border-color;
+    cursor: pointer;
+    padding: em(10);
 
-        &:first-child {
-            border-top: 1px solid $base-border-color;
-        }
-
-        &.active,
-        &:hover {
-            background: $base-accent-color;
-        }
+    &:first-child {
+      border-top: 1px solid $base-border-color;
     }
 
-    a {
-        color: $base-font-color;
-
-        &:focus {
-            font-weight: bold;
-        }
+    &.active,
+    &:hover {
+      background: $base-accent-color;
     }
+  }
+
+  a {
+    color: $base-font-color;
+
+    &:focus {
+      font-weight: bold;
+    }
+  }
 }
 
 .logo {
-    font-family: 'Raleway', sans-serif;
-    font-size: em(48);
-    position: absolute;
-    right: em(10);
-    line-height: 100px;
+  font-family: 'Raleway', sans-serif;
+  font-size: em(48);
+  position: absolute;
+  right: em(10);
+  line-height: 100px;
 }

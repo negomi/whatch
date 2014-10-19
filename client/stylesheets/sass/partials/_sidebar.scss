@@ -10,7 +10,7 @@ $sidebar-color-hover: #fff;
   @include omega;
 
   @include position(fixed, 0px auto 0px 0px);
-  
+
   background: $sidebar-background;
   z-index: 99999;
   overflow-y: scroll;
