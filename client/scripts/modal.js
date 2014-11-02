@@ -5,14 +5,15 @@ if (Meteor.isClient) {
     info: function () {
       return Session.get('movieInfo');
     },
-    // Close the modal and overlay, and clear the session data.
-    closeModal: function() {
-      Session.set('movieInfo', []);
-      $('.modal').add('.overlay').fadeOut('fast');
-      $('body').css({overflow: 'auto'});
-      $('input').prop('disabled', false);
-    }
   });
+
+  // Close the modal and overlay, and clear the session data.
+  var closeModal = function() {
+    Session.set('movieInfo', []);
+    $('.modal').add('.overlay').fadeOut('fast');
+    $('body').css({overflow: 'auto'});
+    $('input').prop('disabled', false);
+  };
 
   Template.modal.events({
     // Save the current movie to the database.
@@ -26,13 +27,12 @@ if (Meteor.isClient) {
 
       Movies.insert(movie, function(err, id) {
         if (err) console.log(err);
-
-        Template.modal.closeModal();
+        closeModal();
       });
     },
 
     'click .modal-close': function(event, template) {
-      Template.modal.closeModal();
+      closeModal();
     }
   });
 }
