@@ -128,7 +128,8 @@ if (Meteor.isClient) {
       // Bring up the movie info.
       if (click || pressed(key) === 'enter' || pressed(key) === 'tab') {
           var imdbId = event.target.dataset.imdbid ||
-            event.target.parentNode.dataset.imdbid;
+            event.target.parentNode.dataset.imdbid ||
+            event.target.firstChild.dataset.imdbid;
           if (!imdbId) return;
           $(document.activeElement.parentNode).removeClass('active');
           fetchDetails(imdbId);
