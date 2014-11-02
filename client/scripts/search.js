@@ -24,8 +24,6 @@ if (Meteor.isClient) {
 
   // Search the OMDbAPI for a movie title.
   var searchApi = function(title) {
-    Session.set('loading', true);
-
     $.ajax({
       url: 'http://www.omdbapi.com/?s=' + title,
       dataType: 'json',
@@ -89,8 +87,10 @@ if (Meteor.isClient) {
       if (pressed(key) === 'alphNum' || pressed(key) === 'delete') {
         var searchTerm = template.find('#search-form').value;
         if (searchTerm.isEmpty()) {
+          Session.set('loading', false);
           Session.set('searchResults', []);
         } else {
+          Session.set('loading', true);
           searchApi(searchTerm);
         }
       }
