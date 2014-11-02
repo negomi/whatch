@@ -1,9 +1,11 @@
 if (Meteor.isClient) {
 
-  // Fetch all saved movies, ordered by most recently added first.
-  Template.movies.movies = function() {
-    return Movies.find({owner: Meteor.userId()}, {sort: {added: -1}});
-  };
+  Template.movies.helpers({
+    // Fetch all saved movies, ordered by most recently added first.
+    'movies': function() {
+      return Movies.find({owner: Meteor.userId()}, {sort: {added: -1}});
+    }
+  });
 
   Template.movies.events({
     // Show the movie info on hover.

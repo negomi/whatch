@@ -1,6 +1,7 @@
 <template name="search">
     <div class="autocomplete-wrapper">
         <input type="text" id="search-form" class="search" placeholder="Search for a movie..." />
+        {{#if loading}}<img class="loading-icon--results" src="loading-spinning-bubbles.svg" alt="Loading icon" />{{/if}}
 
         <ul id="results" class="results">
             {{#each results}}

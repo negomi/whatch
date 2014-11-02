@@ -18,6 +18,7 @@
 .autocomplete-wrapper {
   @include span-columns(10);
   @include shift(2);
+  position: relative;
 
   @include media($medium-screen-up) {
     @include span-columns(6 of 10);
@@ -36,6 +37,12 @@ input.search {
   margin-bottom: 0;
   margin-top: em(20);
   padding: em(20) em(10);
+}
+
+.loading-icon--results {
+  position: absolute;
+  top: em(30);
+  right: em(10);
 }
 
 .results {

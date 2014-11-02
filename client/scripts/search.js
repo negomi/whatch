@@ -24,15 +24,19 @@ if (Meteor.isClient) {
 
   // Search the OMDbAPI for a movie title.
   var searchApi = function(title) {
+    Session.set('loading', true);
+
     $.ajax({
       url: 'http://www.omdbapi.com/?s=' + title,
       dataType: 'json',
       success: function(data, textStatus, jqXHR) {
         if ('undefined' !== typeof data.Search) {
+          Session.set('loading', false);
           Session.set('searchResults', data.Search);
         }
       },
       error: function(jqXHR, textStatus, errorThrown) {
+        Session.set('loading', false);
         console.error(errorThrown.message);
       }
     });
@@ -68,10 +72,15 @@ if (Meteor.isClient) {
     $("#search-form").val('');
   };
 
-  // Populate the autocomplete with results.
-  Template.search.results = function() {
-    return Session.get('searchResults');
-  };
+  Template.search.helpers({
+    'results': function() {
+      // Populate the autocomplete with results.
+      return Session.get('searchResults');
+    },
+    'loading': function() {
+      return Session.get('loading');
+    }
+  });
 
   Template.search.events({
     'keyup #search-form': function(event, template) {
@@ -86,7 +95,7 @@ if (Meteor.isClient) {
         }
       }
     },
-    
+
     'keydown #search-form': function(event, template) {
       var key = event.which;
 
