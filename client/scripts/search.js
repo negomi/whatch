@@ -70,6 +70,14 @@ if (Meteor.isClient) {
     $("#search-form").val('');
   };
 
+  // Abandon the search if the user clicks away from the autocomplete.
+  $(document).on('click', function(event, template) {
+    var clicked = event.target.id;
+    if (clicked !== 'results' || clicked !== 'search-form') {
+      clearSearch();
+    }
+  });
+
   Template.search.helpers({
     'results': function() {
       // Populate the autocomplete with results.
@@ -165,14 +173,6 @@ if (Meteor.isClient) {
         }
         return;
       }
-    }
-  });
-
-  // Abandon the search if the user clicks away from the autocomplete.
-  $(document).on('click', function(event, template) {
-    var clicked = event.target.id;
-    if (clicked !== 'results' || clicked !== 'search-form') {
-      clearSearch();
     }
   });
 }

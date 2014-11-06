@@ -1,12 +1,5 @@
 if (Meteor.isClient) {
 
-  Template.modal.helpers({
-    // Fetch the current movie info stored in the session.
-    info: function () {
-      return Session.get('movieInfo');
-    },
-  });
-
   // Close the modal and overlay, and clear the session data.
   var closeModal = function() {
     Session.set('movieInfo', []);
@@ -14,6 +7,13 @@ if (Meteor.isClient) {
     $('body').css({overflow: 'auto'});
     $('input').prop('disabled', false);
   };
+
+  Template.modal.helpers({
+    // Fetch the current movie info stored in the session.
+    info: function () {
+      return Session.get('movieInfo');
+    },
+  });
 
   Template.modal.events({
     // Save the current movie to the database.
