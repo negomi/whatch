@@ -76,7 +76,7 @@ input.autocomplete__search {
 }
 
 .header__logo {
-  @include position(absolute, auto rem(10px) auto auto);
+  @include position(absolute, auto rem(16px) auto auto);
   font-family: 'Raleway', sans-serif;
   font-size: rem(48px);
   line-height: rem(100px);
