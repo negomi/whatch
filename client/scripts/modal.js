@@ -13,6 +13,12 @@ if (Meteor.isClient) {
     info: function () {
       return Session.get('movieInfo');
     },
+    hasMovie: function() {
+      return Movies.findOne({
+        owner: Meteor.userId(),
+        imdbID: Session.get('movieInfo').imdbID
+      });
+    }
   });
 
   Template.modal.events({

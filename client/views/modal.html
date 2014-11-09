@@ -4,7 +4,12 @@
         <h1>{{info.Title}}</h1>
         <h4>{{info.Year}}</h4>
         <p>{{info.Plot}}</p>
-        <button class="add-movie">Add {{info.Title}}</button>
+
+        {{#if hasMovie}}
+          <button disabled="true" class="disabled">Already in your list</button>
+        {{else}}
+          <button class="add-movie">Add {{info.Title}}</button>
+        {{/if}}
     </div>
     <img class="modal__image" src="{{info.Poster}}" alt="{{info.Title}}">
 </template>

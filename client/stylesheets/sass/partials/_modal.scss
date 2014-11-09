@@ -81,3 +81,7 @@ $modal-close-color: gray;
   margin-right: 1.5em;
   max-height: rem(450px);
 }
+
+button.disabled {
+  background: $hover-link-color;
+}
