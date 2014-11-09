@@ -82,6 +82,18 @@ if (Meteor.isClient) {
       }
 
       Session.set(filterType + 'Filter', regex);
+
+      // When a filter is cleared, check if all filters are cleared.
+      // If so, hide the reset button.
+      if (!event.target.checked) {
+        var filters = ['genre', 'country', 'director', 'language'];
+        var allUnchecked = _.all(filters, function(e, i) {
+          return !Session.get(e + 'Filter') || Session.get(e + 'Filter') === '.*';
+        });
+        if (allUnchecked) {
+          $($('.sidebar__reset--filters')[0]).hide();
+        }
+      }
     },
 
     'click .sidebar__reset--sorting': function(event, template) {
