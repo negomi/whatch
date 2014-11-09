@@ -2,61 +2,60 @@
   @include span-columns(10);
   @include shift(2);
 
-  margin-top: $header-height + em(30);
-  // padding-right: em(30);
+  margin-top: $header-height + rem(30px);
 }
 
 @mixin grid-item-columns($columns) {
   width: (100% / 12) * $columns;
 }
 
-.grid-items {
-  $grid-items-background: $base-background-color;
-  $grid-item-border-size: 20px;
-  $grid-item-columns: 3;
-  $grid-item-height: 28em;
-
+.grid {
   @include clearfix;
+}
 
-  .grid-item {
-    @include transition (all 0.2s ease-in-out);
+.grid-item {
+  $grid-items-background: $base-background-color;
+  $grid-item-border-size: rem(20px);
+  $grid-item-columns: 3;
+  $grid-item-height: rem(440px);
 
-    border-bottom: $grid-item-border-size solid $grid-items-background;
-    border-right: $grid-item-border-size solid $grid-items-background;
-    float: left;
-    height: $grid-item-height;
-    overflow: hidden;
-    position: relative;
-    width: 100%;
+  @include transition (all 0.2s ease-in-out);
 
-    @include media($large-screen) {
-      @include grid-item-columns($grid-item-columns);
-    }
+  border-bottom: $grid-item-border-size solid $grid-items-background;
+  border-right: $grid-item-border-size solid $grid-items-background;
+  float: left;
+  min-height: $grid-item-height;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+
+  @include media($large-screen) {
+    @include grid-item-columns($grid-item-columns);
   }
 }
 
-.image-wrapper img {
+.grid-item__image img {
   @include absolute-center;
 }
 
-.hover-info {
+.grid-item__info {
   @include position(absolute, 0px 0px 0px 0px);
 
   background: transparentize(black, .2);
   display: none;
   padding: 1em 1.5em;
 
-  h4 {
+  .title {
     color: white;
     margin-bottom: .1em;
   }
 
-  h5 {
+  .year {
     color: transparentize(white, .3);
     margin-bottom: .5em;
   }
 
-  p {
+  .plot {
     color: transparentize(white, .3);
   }
 

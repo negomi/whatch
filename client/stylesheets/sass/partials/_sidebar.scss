@@ -33,7 +33,7 @@ $sidebar-footer-height: rem(50px);
   padding: rem(10px);
 }
 
-.reset-button {
+.sidebar__reset {
   display: none;
 
   float: right;
@@ -41,9 +41,9 @@ $sidebar-footer-height: rem(50px);
   padding: rem(5px) rem(8px);
 }
 
-.reset-button--sorting,
-.reset-button--filters {
-  @extend .reset-button;
+.sidebar__reset--sorting,
+.sidebar__reset--filters {
+  @extend .sidebar__reset;
 }
 
 .sidebar__filter {

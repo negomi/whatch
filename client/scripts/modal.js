@@ -17,7 +17,7 @@ if (Meteor.isClient) {
 
   Template.modal.events({
     // Save the current movie to the database.
-    'click #add-movie': function(event, template) {
+    'click .add-movie': function(event, template) {
       event.preventDefault();
       var apiData = Session.get('movieInfo');
 
@@ -34,7 +34,7 @@ if (Meteor.isClient) {
       });
     },
 
-    'click .modal-close': function(event, template) {
+    'click .close': function(event, template) {
       closeModal();
     }
   });

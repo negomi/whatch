@@ -53,7 +53,7 @@ if (Meteor.isClient) {
     },
     'click .radio': function(event, template) {
       resetSorting();
-      $($('.reset-button--sorting')[0]).show();
+      $($('.sidebar__reset--sorting')[0]).show();
       event.target.checked = true;
 
       var sortType = event.target.parentNode.parentNode.id;
@@ -75,7 +75,7 @@ if (Meteor.isClient) {
       var regex = Session.get(filterType + 'Filter') || '.*';
 
       if (event.target.checked) {
-        $($('.reset-button--filters')[0]).show();
+        $($('.sidebar__reset--filters')[0]).show();
         regex = '(?=.*\\b' + event.target.value + '\\b)' + regex;
       } else {
         regex = regex.replace('(?=.*\\b' + event.target.value + '\\b)', '');
@@ -84,7 +84,7 @@ if (Meteor.isClient) {
       Session.set(filterType + 'Filter', regex);
     },
 
-    'click .reset-button--sorting': function(event, template) {
+    'click .sidebar__reset--sorting': function(event, template) {
       event.preventDefault();
       resetSorting();
 
@@ -96,10 +96,10 @@ if (Meteor.isClient) {
       _.each(sortMenus, function(e, i) { $('#' + e).slideUp('fast'); });
 
       // Hide the reset button.
-      $($('.reset-button--sorting')[0]).hide();
+      $($('.sidebar__reset--sorting')[0]).hide();
     },
 
-    'click .reset-button--filters': function(event, template) {
+    'click .sidebar__reset--filters': function(event, template) {
       event.preventDefault();
       resetFilters();
 
@@ -112,7 +112,7 @@ if (Meteor.isClient) {
       });
 
       // Hide the reset button.
-      $($('.reset-button--filters')[0]).hide();
+      $($('.sidebar__reset--filters')[0]).hide();
     }
   });
 }

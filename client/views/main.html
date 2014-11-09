@@ -8,7 +8,7 @@
     {{#if currentUser}}
         <header class="header">
             {{>search}}
-            <span class="logo">whatch.</span>
+            <span class="header__logo">whatch.</span>
         </header>
 
         <nav class="sidebar">
@@ -25,13 +25,11 @@
             {{>modal}}
         </div>
     {{else}}
-        <div class="bg"></div>
-        <div class="landing-page">
-            <div class="center-container">
-                <h1 class="logo-big">whatch.</h1>
-                <h2 class="subheading">a helpful to-do list for movies</h2>
-                {{> loginButtons}}
-            </div>
+        <div class="landing-page__background"></div>
+        <div class="landing-page__container">
+            <h1 class="landing-page__logo">whatch.</h1>
+            <h2 class="landing-page__subheading">a helpful to-do list for movies</h2>
+            <div class="landing-page__button-wrap">{{> loginButtons}}</div>
         </div>
     {{/if}}
 </body>

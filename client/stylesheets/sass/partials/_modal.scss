@@ -27,12 +27,6 @@ $modal-close-color: gray;
   margin-top: .6em;
   z-index: 999999;
 
-  img {
-    float: right;
-    margin-right: 1.5em;
-    max-height: rem(450px);
-  }
-
   @include media($medium-screen) {
     padding: $modal-padding;
     width: 70%;
@@ -46,7 +40,7 @@ $modal-close-color: gray;
   }
 }
 
-.modal-close {
+.close {
   @include position(absolute, ($modal-padding /2) ($modal-padding /2) auto auto);
   @include size(1.5em);
   cursor: pointer;
@@ -73,11 +67,17 @@ $modal-close-color: gray;
   }
 }
 
-#info {
+.modal__info {
   width: 50%;
   float: left;
 
   p {
     margin: 1em 0;
   }
+}
+
+.modal__image {
+  float: right;
+  margin-right: 1.5em;
+  max-height: rem(450px);
 }
