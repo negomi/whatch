@@ -3,35 +3,81 @@ $sidebar-background: lighten($sidebar-border-color, 5);
 $sidebar-color: #fff;
 $sidebar-border: 1px solid $sidebar-border-color;
 $sidebar-background-hover: $base-accent-color;
-$sidebar-color-hover: #fff;
+$sidebar-footer-height: rem(50px);
 
 .sidebar {
   @include span-columns(2);
   @include omega;
 
-  @include position(fixed, 0px auto 0px 0px);
+  @include position(fixed, 0px auto $sidebar-footer-height 0px);
 
   background: $sidebar-background;
+  color: $sidebar-color;
+  height: auto;
   z-index: 99999;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
+}
 
-  li a {
-    border-bottom: $sidebar-border;
-    color: $sidebar-color;
-    display: block;
-    font-weight: bold;
-    padding: em(16);
+.sidebar__section {
+  border-bottom: $sidebar-border;
+}
 
-    &:hover {
-      background-color: $sidebar-background-hover;
-      color: $sidebar-color-hover;
-    }
+.sidebar__section--sort-by,
+.sidebar__section--filter-by {
+  @extend .sidebar__section;
+}
+
+.sidebar__heading {
+  border-bottom: $sidebar-border;
+  padding: rem(10px);
+}
+
+.reset-button {
+  display: none;
+
+  float: right;
+  font-size: rem(14px);
+  padding: rem(5px) rem(8px);
+}
+
+.reset-button--sorting,
+.reset-button--filters {
+  @extend .reset-button;
+}
+
+.sidebar__filter {
+  display: block;
+  font-weight: bold;
+  padding: rem(16pc);
+
+  &:hover {
+    background-color: $sidebar-background-hover;
+    color: $sidebar-background;
   }
 }
 
+.sidebar__filter-list {
+  display: none;
+
+  border-bottom: $sidebar-border;
+  border-top: $sidebar-border;
+  font-size: rem(14px);
+
+  padding: rem(8px) rem(16px);
+}
+
+.sidebar__footer {
+  @include span-columns(2);
+  @include omega;
+
+  @include position(fixed, auto auto 0px auto);
+
+  height: $sidebar-footer-height;
+  background: $sidebar-background;
+  padding: rem(14px);
+}
+
 .logout {
-  position: absolute;
-  bottom: em(16);
-  right: em(16);
+  float: right;
 }

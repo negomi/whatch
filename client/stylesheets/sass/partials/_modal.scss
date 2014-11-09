@@ -30,6 +30,7 @@ $modal-close-color: gray;
   img {
     float: right;
     margin-right: 1.5em;
+    max-height: rem(450px);
   }
 
   @include media($medium-screen) {

@@ -19,10 +19,13 @@ if (Meteor.isClient) {
     // Save the current movie to the database.
     'click #add-movie': function(event, template) {
       event.preventDefault();
+      var apiData = Session.get('movieInfo');
 
-      var movie = _.extend(Session.get('movieInfo'), {
+      var movie = _.extend(apiData, {
         owner: Meteor.userId(),
-        added: Date.now()
+        added: Date.now(),
+        dateReleased: new Date(apiData.Released),
+        length: Number(apiData.Runtime.replace(' min', ''))
       });
 
       Movies.insert(movie, function(err, id) {

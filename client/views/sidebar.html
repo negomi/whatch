@@ -1,0 +1,71 @@
+<template name="sidebar">
+  <section class="sidebar__section--sort-by">
+    <div class="sidebar__heading">Sort by: <button class="reset-button--sorting">Reset</button></div>
+    <ul>
+      <li><a class="sidebar__filter" data-filter="imdbRating" href="">IMDb Rating</a></li>
+      <form class="sidebar__filter-list" id="imdbRating" action="">
+        <label>
+          <input class="radio" type="radio" value="asc" name="rating">Lowest
+        </label>
+        <label>
+          <input class="radio" type="radio" value="desc" name="rating">Highest
+        </label>
+      </form>
+      <li><a class="sidebar__filter" data-filter="dateReleased" href="">Released</a></li>
+      <form class="sidebar__filter-list" id="dateReleased" action="">
+        <label>
+          <input class="radio" type="radio" value="asc" name="released">Oldest
+        </label>
+        <label>
+          <input class="radio" type="radio" value="desc" name="released">Newest
+        </label>
+      </form>
+      <li><a class="sidebar__filter" data-filter="length" href="">Runtime</a></li>
+      <form class="sidebar__filter-list" id="length" action="">
+        <label>
+          <input class="radio" type="radio" value="asc" name="runtime">Shortest
+        </label>
+        <label>
+          <input class="radio" type="radio" value="desc" name="runtime">Longest
+        </label>
+      </form>
+    </ul>
+  </section>
+  <section class="sidebar__section--filter-by">
+    <div class="sidebar__heading">Filter by: <button class="reset-button--filters">Reset</button></div>
+    <ul>
+      <li><a class="sidebar__filter" data-filter="genre" href="">Genre</a></li>
+      <form class="sidebar__filter-list" id="genre" action="">
+        {{#each genres}}
+        <label>
+          <input class="checkbox" type="checkbox" value="{{this}}">{{this}}
+        </label>
+        {{/each}}
+      </form>
+      <li><a class="sidebar__filter" data-filter="country" href="">Country</a></li>
+      <form class="sidebar__filter-list" id="country" action="">
+        {{#each countries}}
+        <label>
+          <input class="checkbox" type="checkbox" value="{{this}}">{{this}}
+        </label>
+        {{/each}}
+      </form>
+      <li><a class="sidebar__filter" data-filter="director" href="">Director</a></li>
+      <form class="sidebar__filter-list" id="director" action="">
+        {{#each directors}}
+        <label>
+          <input class="checkbox" type="checkbox" value="{{this}}">{{this}}
+        </label>
+        {{/each}}
+      </form>
+      <li><a class="sidebar__filter" data-filter="language" href="">Language</a></li>
+      <form class="sidebar__filter-list" id="language" action="">
+        {{#each languages}}
+        <label>
+          <input class="checkbox" type="checkbox" value="{{this}}">{{this}}
+        </label>
+        {{/each}}
+      </form>
+    </ul>
+  </section>
+</template>
