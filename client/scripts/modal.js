@@ -14,10 +14,10 @@ if (Meteor.isClient) {
       return Session.get('movieInfo');
     },
     hasMovie: function() {
-      return Movies.findOne({
-        owner: Meteor.userId(),
-        imdbID: Session.get('movieInfo').imdbID
-      });
+      var movie = Session.get('movieInfo');
+      if (movie) {
+        return Movies.findOne({owner: Meteor.userId(), imdbID: movie.imdbID });
+      }
     }
   });
 
