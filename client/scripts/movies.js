@@ -1,8 +1,9 @@
 if (Meteor.isClient) {
+
   Template.movies.helpers({
     // Return a list of the user's saved movies, taking into account
     // any filters applied. Default sorting is by most recently added first.
-    'movies': function() {
+    movies: function() {
       var sortOrder = Session.get('sortOrder') || {added: -1};
 
       var collection = Movies.find({

@@ -1,89 +1,10 @@
 if (Meteor.isClient) {
 
-  // Check for an empty string.
-  String.prototype.isEmpty = function() {
-    return this.length === 0 || !this.trim();
-  };
-
-  // Determine which key was pressed.
-  var pressed = function(key) {
-    if (key >= 48 && key <= 90) {
-      return 'alphNum';
-    } else if (key === 38) {
-      return 'up';
-    } else if (key === 40) {
-      return 'down';
-    } else if (key === 13) {
-      return 'enter';
-    } else if (key === 9) {
-      return 'tab';
-    } else if (key === 8) {
-      return 'delete';
-    }
-  };
-
-  // Search the OMDbAPI for a movie title.
-  var searchApi = function(title) {
-    $.ajax({
-      url: 'http://www.omdbapi.com/?s=' + title,
-      dataType: 'json',
-      success: function(data, textStatus, jqXHR) {
-        if ('undefined' !== typeof data.Search) {
-          Session.set('loading', false);
-          Session.set('searchResults', data.Search);
-        }
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        Session.set('loading', false);
-        console.error(errorThrown.message);
-      }
-    });
-  };
-
-  // Fetch a movie's details based on its IMDbID.
-  var fetchDetails = function(imdbId) {
-    // TODO: if in DB, retrieve from there
-    $.ajax({
-      url: 'http://www.omdbapi.com/?i=' + imdbId,
-      dataType: 'json',
-      success: function(data, textStatus, jqXHR) {
-        showModal(data);
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        console.error(errorThrown.message);
-      }
-    });
-  };
-
-  // Show modal window and disable other parts of the UI.
-  var showModal = function(data) {
-    Session.set('movieInfo', data);
-    $('.overlay').fadeIn('fast');
-    $('.modal').slideDown('fast');
-    $('body').css({overflow: 'hidden'});
-    $('input').prop('disabled', true);
-  };
-
-  // Clear results and reset the search field.
-  var clearSearch = function() {
-    Session.set('searchResults', []);
-    $("#search-form").val('');
-  };
-
-  // Abandon the search if the user clicks away from the autocomplete.
-  $(document).on('click', function(event, template) {
-    var clicked = event.target.id;
-    if (clicked !== 'results' || clicked !== 'search-form') {
-      clearSearch();
-    }
-  });
-
   Template.search.helpers({
-    'results': function() {
-      // Populate the autocomplete with results.
+    results: function() {
       return Session.get('searchResults');
     },
-    'loading': function() {
+    loading: function() {
       return Session.get('loading');
     }
   });
@@ -91,87 +12,45 @@ if (Meteor.isClient) {
   Template.search.events({
     'keyup #search-form': function(event, template) {
       var key = event.which;
-      // Update the results based on search field contents.
-      if (pressed(key) === 'alphNum' || pressed(key) === 'delete') {
-        var searchTerm = template.find('#search-form').value;
-        if (searchTerm.isEmpty()) {
-          Session.set('loading', false);
-          Session.set('searchResults', []);
-        } else {
-          Session.set('loading', true);
-          searchApi(searchTerm);
-        }
+      var searchKeys = ['alphNum', 'delete'];
+
+      if (autocomplete.isAllowed(key, searchKeys)) {
+        autocomplete.updateResults();
       }
     },
 
+    // event.preventDefault() needs to be inside the if statements here,
+    // otherwise it prevents any text being entered into the search form.
     'keydown #search-form': function(event, template) {
       var key = event.which;
 
-      // Bring up the results of the first movie.
-      if (pressed(key) === 'enter') {
+      if (autocomplete.pressed(key) === 'enter') {
         event.preventDefault();
-        if (!_.isEqual(Session.get('searchResults'), [])) {
-          fetchDetails(template.find('.result a').dataset.imdbid);
-          clearSearch();
-        }
-        return;
+        autocomplete.fetchFirst();
       }
 
-      // Focus first movie in the list.
-      if (pressed(key) === 'down' || pressed(key) === 'tab') {
+      var focusKeys = ['down', 'tab'];
+      if (autocomplete.isAllowed(key, focusKeys)) {
         event.preventDefault();
-        if (!_.isEqual(Session.get('searchResults'), [])) {
-          template.find('.result a').focus();
-          $(document.activeElement.parentNode).addClass('active');
-        }
-        return;
+        autocomplete.focusFirst();
       }
     },
 
     'click, keydown #results': function(event, template) {
-      var key = event.which;
-      var click = event.type === 'click';
       event.preventDefault();
+      var key = event.which;
 
-      // Bring up the movie info.
-      if (click || pressed(key) === 'enter' || pressed(key) === 'tab') {
-        var imdbId;
-        try {
-          imdbId = event.target.dataset.imdbid ||
-            event.target.parentNode.dataset.imdbid ||
-            event.target.firstChild.dataset.imdbid;
-        }
-        finally {
-          if (!imdbId) return;
-          $(document.activeElement.parentNode).removeClass('active');
-          fetchDetails(imdbId);
-          clearSearch();
-          return;
-        }
+      var enterKeys = ['enter', 'tab'];
+      if (event.type === 'click' || autocomplete.isAllowed(key, enterKeys)) {
+        autocomplete.fetch();
       }
 
-      // Focus the next movie if it exists.
-      if (pressed(key) === 'down') {
-        var next = document.activeElement.parentNode.nextElementSibling;
-        if (next) {
-          $(document.activeElement.parentNode).removeClass('active');
-          $(next).addClass('active');
-          next.firstChild.focus();
-        }
-        return;
+      if (autocomplete.pressed(key) === 'down') {
+        autocomplete.focusNext();
       }
 
-      // Focus the previous movie if it exists, or the search form.
-      if (pressed(key) === 'up') {
-        $(document.activeElement.parentNode).removeClass('active');
-        var prev = document.activeElement.parentNode.previousElementSibling;
-        if (prev) {
-          $(prev).addClass('active');
-          prev.firstChild.focus();
-        } else {
-          template.find("#search-form").focus();
-        }
-        return;
+      if (autocomplete.pressed(key) === 'up') {
+        autocomplete.focusPrevious();
       }
     }
   });

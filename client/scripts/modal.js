@@ -1,15 +1,6 @@
 if (Meteor.isClient) {
 
-  // Close the modal and overlay, and clear the session data.
-  var closeModal = function() {
-    Session.set('movieInfo', []);
-    $('.modal').add('.overlay').fadeOut('fast');
-    $('body').css({overflow: 'auto'});
-    $('input').prop('disabled', false);
-  };
-
   Template.modal.helpers({
-    // Fetch the current movie info stored in the session.
     info: function () {
       return Session.get('movieInfo');
     },
@@ -36,12 +27,12 @@ if (Meteor.isClient) {
 
       Movies.insert(movie, function(err, id) {
         if (err) console.log(err);
-        closeModal();
+        modal.close();
       });
     },
 
     'click .close': function(event, template) {
-      closeModal();
+      modal.close();
     }
   });
 }

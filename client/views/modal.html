@@ -1,15 +1,15 @@
 <template name="modal">
-    <span class="close"></span>
-    <div class="modal__info">
-        <h1>{{info.Title}}</h1>
-        <h4>{{info.Year}}</h4>
-        <p>{{info.Plot}}</p>
+  <span class="close"></span>
+  <div class="modal__info">
+    <h1>{{info.Title}}</h1>
+    <h4>{{info.Year}}</h4>
+    <p>{{info.Plot}}</p>
 
-        {{#if hasMovie}}
-          <button disabled="true" class="disabled">Already in your list</button>
-        {{else}}
-          <button class="add-movie">Add {{info.Title}}</button>
-        {{/if}}
-    </div>
-    <img class="modal__image" src="{{info.Poster}}" alt="{{info.Title}}">
+    {{#if hasMovie}}
+    <button disabled="true" class="disabled">Already in your list</button>
+    {{else}}
+    <button class="add-movie">Add {{info.Title}}</button>
+    {{/if}}
+  </div>
+  <img class="modal__image" src="{{info.Poster}}" alt="{{info.Title}}">
 </template>

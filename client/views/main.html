@@ -1,35 +1,35 @@
 <head>
-    <title>whatch.</title>
-    <link href='http://fonts.googleapis.com/css?family=Raleway:700' rel='stylesheet' type='text/css'>
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type='text/css'>
+  <title>whatch.</title>
+  <link href='http://fonts.googleapis.com/css?family=Raleway:700' rel='stylesheet' type='text/css'>
+  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type='text/css'>
 </head>
 
 <body>
-    {{#if currentUser}}
-        <header class="header">
-            {{>search}}
-            <span class="header__logo">whatch.</span>
-        </header>
+  {{#if currentUser}}
+  <header class="header">
+    {{>search}}
+    <span class="header__logo">whatch.</span>
+  </header>
 
-        <nav class="sidebar">
-            {{>sidebar}}
-            {{>logout}}
-        </nav>
+  <nav class="sidebar">
+    {{>sidebar}}
+    {{>logout}}
+  </nav>
 
-        <main class="main">
-            {{>movies}}
-        </main>
+  <main class="main">
+    {{>movies}}
+  </main>
 
-        <div class="overlay"></div>
-        <div class="modal">
-            {{>modal}}
-        </div>
-    {{else}}
-        <div class="landing-page__background"></div>
-        <div class="landing-page__container">
-            <h1 class="landing-page__logo">whatch.</h1>
-            <h2 class="landing-page__subheading">a helpful to-do list for movies</h2>
-            <div class="landing-page__button-wrap">{{> loginButtons}}</div>
-        </div>
-    {{/if}}
+  <div class="overlay"></div>
+  <div class="modal">
+    {{>modal}}
+  </div>
+  {{else}}
+  <div class="landing-page__background"></div>
+  <div class="landing-page__container">
+    <h1 class="landing-page__logo">whatch.</h1>
+    <h2 class="landing-page__subheading">a helpful to-do list for movies</h2>
+    <div class="landing-page__button-wrap">{{> loginButtons}}</div>
+  </div>
+  {{/if}}
 </body>

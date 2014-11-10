@@ -1,18 +1,18 @@
 <template name="movies">
-    <div class="grid">
-        {{#each movies}}
-        <div class="grid-item">
-            <div class="grid-item__image">
-                <img src="{{Poster}}" alt="{{Title}}">
-            </div>
-            <div class="grid-item__info">
-                <h4 class="title">{{Title}}</h4>
-                <h5 class="year">{{Year}}</h5>
-                <p class="plot">{{Plot}}</p>
-                <a href="http://www.imdb.com/title/{{imdbID}}/" class="imdb" target="_blank">IMDb</a>
-                <a href="" class="delete"><i class="fa fa-trash-o fa-2x"></i></a>
-            </div>
-        </div>
-        {{/each}}
+  <div class="grid">
+    {{#each movies}}
+    <div class="grid-item">
+      <div class="grid-item__image">
+        <img src="{{Poster}}" alt="{{Title}}">
+      </div>
+      <div class="grid-item__info">
+        <h4 class="title">{{Title}}</h4>
+        <h5 class="year">{{Year}}</h5>
+        <p class="plot">{{Plot}}</p>
+        <a href="http://www.imdb.com/title/{{imdbID}}/" class="imdb" target="_blank">IMDb</a>
+        <a href="" class="delete"><i class="fa fa-trash-o fa-2x"></i></a>
+      </div>
     </div>
+    {{/each}}
+  </div>
 </template>

@@ -1,4 +1,5 @@
 if (Meteor.isClient) {
+
   // Return a sorted array of all types of a given property included
   // in the user's movie list, with any duplicate values removed.
   var listUniques = function(list, prop) {
@@ -31,16 +32,16 @@ if (Meteor.isClient) {
   };
 
   Template.sidebar.helpers({
-    'genres': function() {
+    genres: function() {
       return listUniques(fetchMovies(), 'Genre');
     },
-    'countries': function() {
+    countries: function() {
       return listUniques(fetchMovies(), 'Country');
     },
-    'directors': function() {
+    directors: function() {
       return listUniques(fetchMovies(), 'Director');
     },
-    'languages': function() {
+    languages: function() {
       return listUniques(fetchMovies(), 'Language');
     }
   });
